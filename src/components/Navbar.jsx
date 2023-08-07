@@ -12,13 +12,13 @@ const Navbar = () => {
           title="follow me on github"
         >
           <img
-            className="roll-in-left"
+            className="roll-in-left "
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2048px-Octicons-mark-github.svg.png"
             alt="github logo"
             height={30}
             width={30}
           />
-          <span className="text-flicker-in-glow ">vickyvk326</span>
+          <span className="heartbeat ">vickyvk326</span>
         </a>
       </span>
     </div>

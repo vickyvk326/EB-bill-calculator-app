@@ -15,6 +15,7 @@ const ConsumerCalculation = () => {
         Enter consumed units (kWh)
       </label>
       <input
+        autoFocus
         type="number"
         placeholder="Eg: 250"
         onKeyDown={handleKeyDown}

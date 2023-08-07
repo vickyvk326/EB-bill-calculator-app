@@ -4,6 +4,7 @@ import "./animista.css";
 import { createContext, useState } from "react";
 export const BillContext = createContext();
 const App = () => {
+  const [calculationDays, setCalculationDays] = useState(60);
   const [calculationMethod, setCalculationMethod] = useState(false);
   const [consumedUnits, setConsumedUnits] = useState(0);
   return (
@@ -17,6 +18,8 @@ const App = () => {
             setCalculationMethod,
             consumedUnits,
             setConsumedUnits,
+            calculationDays,
+            setCalculationDays,
           }}
         >
           <div className="left">

@@ -1,29 +1,37 @@
 import { useContext, useEffect, useState } from "react";
 import { BillContext } from "../App";
 const Calculate = () => {
-  const { consumedUnits } = useContext(BillContext);
+  const { consumedUnits, calculationDays } = useContext(BillContext);
   const [billAmount, setBillAmount] = useState(0);
-  const handleCalculateBill = () => {
-    if (consumedUnits <= 500 && consumedUnits > 0) {
-      if (consumedUnits <= 100) {
+  const handleCalculateBill = (calculatedConsumedUnits) => {
+    if (calculatedConsumedUnits <= 500 && calculatedConsumedUnits > 0) {
+      if (calculatedConsumedUnits <= 100) {
         setBillAmount(0);
-      } else if (consumedUnits <= 200) {
-        setBillAmount((consumedUnits - 100) * 2.25);
-      } else if (consumedUnits <= 400) {
-        setBillAmount(100 * 2.25 + (consumedUnits - 200) * 4.5);
+      } else if (calculatedConsumedUnits <= 200) {
+        setBillAmount((calculatedConsumedUnits - 100) * 2.25);
+      } else if (calculatedConsumedUnits <= 400) {
+        setBillAmount(100 * 2.25 + (calculatedConsumedUnits - 200) * 4.5);
       } else {
-        setBillAmount(100 * 2.25 + 200 * 4.5 + (consumedUnits - 400) * 6);
+        setBillAmount(
+          100 * 2.25 + 200 * 4.5 + (calculatedConsumedUnits - 400) * 6
+        );
       }
     } else {
-      if (consumedUnits <= 600) {
-        setBillAmount(300 * 4.5 + 100 * 6 + (consumedUnits - 500) * 8);
-      } else if (consumedUnits <= 800) {
+      if (calculatedConsumedUnits <= 600) {
         setBillAmount(
-          300 * 4.5 + 100 * 6 + 100 * 8 + (consumedUnits - 600) * 9
+          300 * 4.5 + 100 * 6 + (calculatedConsumedUnits - 500) * 8
         );
-      } else if (consumedUnits <= 1000) {
+      } else if (calculatedConsumedUnits <= 800) {
         setBillAmount(
-          300 * 4.5 + 100 * 6 + 100 * 8 + 200 * 9 + (consumedUnits - 800) * 10
+          300 * 4.5 + 100 * 6 + 100 * 8 + (calculatedConsumedUnits - 600) * 9
+        );
+      } else if (calculatedConsumedUnits <= 1000) {
+        setBillAmount(
+          300 * 4.5 +
+            100 * 6 +
+            100 * 8 +
+            200 * 9 +
+            (calculatedConsumedUnits - 800) * 10
         );
       } else {
         setBillAmount(
@@ -32,21 +40,23 @@ const Calculate = () => {
             100 * 8 +
             200 * 9 +
             200 * 10 +
-            (consumedUnits - 1000)
+            (calculatedConsumedUnits - 1000)
         );
       }
     }
   };
   useEffect(() => {
-    handleCalculateBill();
-  }, [consumedUnits]);
+    handleCalculateBill((consumedUnits / calculationDays) * 60);
+  }, [consumedUnits, calculationDays]);
   return (
     <div className="bill-container">
-      <div>
-        Consumed units: <span>{consumedUnits} kWh</span>
+      <div style={{ marginBottom: "5px" }}>
+        {calculationDays !== 60 && "Predicted "}Consumed units for 60 days:{" "}
+        <span>{((consumedUnits * 60) / calculationDays).toFixed(2)} kWh</span>
       </div>
       <div>
-        Eb bill: <span> ₹ {billAmount} </span>
+        {calculationDays !== 60 && "Predicted "}Eb bill for 60 days(bi-monthly):
+        <span>{" ₹ " + billAmount.toFixed(2)} </span>
       </div>
     </div>
   );

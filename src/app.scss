@@ -1,14 +1,14 @@
 .app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   overflow-y: hidden;
   background-color: rgb(185, 185, 185);
   .navbar {
     background-color: #eeeeee;
     height: 10vh;
-    padding: 1rem 0;
+
     span {
       display: flex;
       flex-direction: row;
@@ -31,8 +31,9 @@
         font-weight: 400;
         a:visited {
           span {
-            color: grey;
+            color: white;
             font-weight: 400;
+            font-size: larger;
           }
         }
         &:active {
@@ -56,7 +57,7 @@
         margin-left: 23%;
         padding: 10px;
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
         select {
           cursor: pointer;
           width: 60%;
@@ -136,8 +137,10 @@
           display: flex;
           flex-direction: column;
           div {
+            width: 75%;
             font-size: 1.3rem;
             span {
+              font-size: 1.5rem;
               font-weight: 500;
             }
           }
@@ -149,7 +152,7 @@
 @media (max-width: 640px) {
   .app {
     .navbar {
-      padding: 6px 0;
+      height: 100%;
       span {
         p {
           font-size: 2rem;
@@ -199,11 +202,28 @@
       .right {
         margin: 0;
         padding: 0;
+        width: 65%;
         border-left: none;
-        height: 10px;
         .result {
           padding: 0;
-          padding-left: 4rem;
+          width: 100%;
+          margin-left: 23%;
+          padding-left: 10px;
+          .bill-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            div {
+              font-size: 1.25rem;
+              width: 100%;
+              margin: 5px 0px 2px;
+              span {
+                font-size: 1rem;
+                margin-left: 1px;
+              }
+            }
+          }
         }
       }
     }
