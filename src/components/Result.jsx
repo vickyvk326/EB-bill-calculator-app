@@ -49,14 +49,28 @@ const Calculate = () => {
     handleCalculateBill((consumedUnits / calculationDays) * 60);
   }, [consumedUnits, calculationDays]);
   return (
-    <div className="bill-container">
+    <div className="bill-container scale-in-center">
       <div style={{ marginBottom: "5px" }}>
-        {calculationDays !== 60 && "Predicted "}Consumed units for 60 days:{" "}
+        {calculationDays !== 60 && "Predicted "}Consumed units for 60 days:
+        <br />
         <span>{((consumedUnits * 60) / calculationDays).toFixed(2)} kWh</span>
       </div>
       <div>
         {calculationDays !== 60 && "Predicted "}Eb bill for 60 days(bi-monthly):
+        <br />
         <span>{" ₹ " + billAmount.toFixed(2)} </span>
+      </div>
+      <div id="average-consumption">
+        Average consumed units per day:
+        <br />
+        <span>{(consumedUnits / calculationDays).toFixed(2)} kWh</span>
+      </div>
+      <div id="current-consumption">
+        {calculationDays !== 60 &&
+          "Current consumed units for " + calculationDays + " days : "}
+        <br />
+        {calculationDays !== 60 && <span>{consumedUnits}</span>}{" "}
+        {calculationDays !== 60 && <span>kWh</span>}
       </div>
     </div>
   );
@@ -64,7 +78,7 @@ const Calculate = () => {
 const Result = () => {
   const { consumedUnits } = useContext(BillContext);
   return (
-    <div className="result">
+    <div className="result ">
       {consumedUnits === 0 ? (
         <div style={{ width: "60%", fontSize: ".78rem", fontWeight: "300" }}>
           <span>
